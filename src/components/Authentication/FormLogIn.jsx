@@ -16,7 +16,9 @@ function FormLogIn() {
           </div>
           <a>Forgot password?</a>
         </div>
-        <ButtonLogIn isRegistered={userIsRegistered} />
+        <div className="d-flex my-4">
+          <ButtonLogIn isRegistered={userIsRegistered} />
+        </div>
         <div className="divider d-flex align-items-center my-4">
           <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
         </div>

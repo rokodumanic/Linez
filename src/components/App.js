@@ -3,10 +3,11 @@ import LogIn from "./Authentication/LogIn";
 import Dashboard from "./Home/Dashboard";
 import Workspace from "./Canvas/Workspace";
 
-var isCardClick = true;
-
 function App(props) {
-  return isCardClick ? <Workspace /> : props.isLogged ? <Dashboard /> : <LogIn />;
-}
+  if(props.isLogged){
+    return <Dashboard/>
+  }else{
+    return <LogIn/>
+  }}
 
 export default App;
