@@ -1,15 +1,20 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
+import {Card, Button} from "react-bootstrap";
 
-function Cards() {
+function Cards(props) {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img className="border border-2 border-dark" variant="top" src="https://www.kfc.gr/admin/files/3190.svg" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>Last updated: INSERTdate</Card.Text>
-      </Card.Body>
-    </Card>
+    <div className="col-sm-6 col-md-4 col-lg-3 pt-4">
+      <Card style={{height: "180px"}}>
+        {props.img ? <Card.Img className="border border-2 border-dark h-50" variant="top" src={props.img} />: null}
+        <Card.Body>
+          <Card.Title>{props.title}</Card.Title>
+          {props.text ? <Card.Text>{props.text}</Card.Text>: null}
+          {props.lastUpdate ? (<Card.Text>Last updated: {props.lastUpdate}</Card.Text>):null}
+          {props.btn ? (<Button variant="dark" >{props.btn}</Button>):null}
+
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
