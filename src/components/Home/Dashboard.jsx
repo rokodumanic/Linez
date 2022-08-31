@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import NavigationBar from "../Navbar";
 import Cards from "./Cards";
 import { nanoid } from "nanoid";
+import Canvas from "../Canvas/Canvas";
 
 function Dashboard(){
+    const [cardClick, setCardClick] = useState(false);
     const [cardInfo, setCard]= useState([
         {
             key: nanoid(),
@@ -23,7 +25,7 @@ function Dashboard(){
     return(
         <div>
             <NavigationBar />
-            <div class="row mx-3">
+            {!cardClick && <div class="row mx-3">
             {cardInfo.map((eachCard) => {
                 return(
                       <Cards 
@@ -32,9 +34,11 @@ function Dashboard(){
                         text={eachCard.text}
                         lastUpdate={eachCard.lastUpdate}
                         btn={eachCard.btn}
+                        handleCardBtn={(e)=>{setCardClick(true)}}
                     />
                     )})}
-            </div>
+            </div>}
+            {cardClick && <Canvas/>}
         </div>
     );
 }
