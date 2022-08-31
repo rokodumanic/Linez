@@ -36,16 +36,15 @@ const handleExport = () => {
   const name = "canvas" + nanoid(5);
   downloadURI(uri, name);
 };
+//download PNG
 function downloadURI(uri, name) {
-  toolLayer.visible=false;
   var link = document.createElement("a");
   link.download = name;
   link.href = uri;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  toolLayer.visible=true;
-}
+};
 // Update polygons
 
 // Add polygons
