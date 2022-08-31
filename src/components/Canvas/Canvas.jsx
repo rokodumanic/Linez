@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import getElementByKey from "./shapes/getElementByKey";
 import Toolbar from "./Toolbar";
 
+
 const Canvas = () => {
   const [tool, setTool] = useState('pen');
   const [lines, setLines] = useState([]);
@@ -14,6 +15,7 @@ const Canvas = () => {
   const [rects, setRects] = useState([]);
   const stageRef = useRef(null);
   const layer1Ref = useRef(null);
+  const toolLayer = useRef(null);
 
   useEffect(()=> {
     // return draggable circle to original position
@@ -27,6 +29,23 @@ const Canvas = () => {
     stageRef.current.findOne(".draggableRoundedRect").position({x: 20, y: 250})
                 console.log(rects);
   }, [rects])
+// Save canvas
+const handleExport = () => {
+  const uri = stageRef.current.toDataURL();
+  console.log(uri);
+  const name = "canvas" + nanoid(5);
+  downloadURI(uri, name);
+};
+function downloadURI(uri, name) {
+  toolLayer.visible=false;
+  var link = document.createElement("a");
+  link.download = name;
+  link.href = uri;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  toolLayer.visible=true;
+}
 // Update polygons
 
 // Add polygons
@@ -92,6 +111,7 @@ const Canvas = () => {
         <option value="eraser">Eraser</option>
         <option value="dragger">Dragger</option>
       </select>
+      <button onClick={handleExport}>Click here to log stage data URL</button>
       <Stage
       ref={stageRef}
       width={window.innerWidth}
@@ -150,7 +170,7 @@ const Canvas = () => {
             />
           )) : null}
         </Layer>
-      <Layer>
+      <Layer ref={toolLayer} visible={true}>
         <Toolbar 
           layer={layer1Ref}
           tool={tool}

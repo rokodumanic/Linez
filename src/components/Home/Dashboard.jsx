@@ -25,7 +25,7 @@ function Dashboard(){
     return(
         <div>
             <NavigationBar />
-            {!cardClick && <div class="row mx-3">
+            {!cardClick && <div className="row mx-3">
             {cardInfo.map((eachCard) => {
                 return(
                       <Cards 
