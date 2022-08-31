@@ -31,10 +31,12 @@ const Canvas = () => {
   }, [rects])
 // Save canvas
 const handleExport = () => {
+  toolLayer.visible=false;
   const uri = stageRef.current.toDataURL();
   console.log(uri);
   const name = "canvas" + nanoid(5);
   downloadURI(uri, name);
+  toolLayer.visible=true;
 };
 //download PNG
 function downloadURI(uri, name) {
@@ -119,6 +121,15 @@ function downloadURI(uri, name) {
       onMousemove={(e)=> handleMouseMove(e, [lines, setLines], isDrawing)}
       onMouseup={()=>isDrawing.current = false}
       >
+      //Backgrund color
+      <Layer>
+        <Rect
+        height={window.innerHeight}
+        width={window.innerWidth}
+          fill="white"
+
+        />
+      </Layer>
         <Layer ref={layer1Ref}>
         
 {/* Display all ellipses and circles */}
