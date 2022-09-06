@@ -121,7 +121,7 @@ function downloadURI(uri, name) {
       onMousemove={(e)=> handleMouseMove(e, [lines, setLines], isDrawing)}
       onMouseup={()=>isDrawing.current = false}
       >
-      //Backgrund color
+      {/* Backgrund color */}
       <Layer>
         <Rect
         height={window.innerHeight}

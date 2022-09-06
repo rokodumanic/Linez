@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import {Card, Button} from "react-bootstrap";
-import Workspace from "../Canvas/Workspace";
 
 function Cards(props) {
   return (
