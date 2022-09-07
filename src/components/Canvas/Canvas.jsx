@@ -31,12 +31,12 @@ const Canvas = () => {
   }, [rects])
 // Save canvas
 const handleExport = () => {
-  toolLayer.visible=false;
+  toolLayer.current.visible(false);
   const uri = stageRef.current.toDataURL();
   console.log(uri);
   const name = "canvas" + nanoid(5);
   downloadURI(uri, name);
-  toolLayer.visible=true;
+  toolLayer.current.visible(true);
 };
 //download PNG
 function downloadURI(uri, name) {
