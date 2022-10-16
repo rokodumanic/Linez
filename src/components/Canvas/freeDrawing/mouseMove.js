@@ -12,6 +12,7 @@ const handleMouseMove = (e, [lines, setLines], isDrawing) => {
   // replace last
   lines.splice(lines.length - 1, 1, lastLine);
   setLines(lines.concat());
+  console.log(lines[0].points);
 };
 
 export default handleMouseMove;

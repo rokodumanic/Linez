@@ -1,3 +1,35 @@
+:root{
+    --sidebar-toggled: false;
+    --sidebar-width: 11rem;
+    --sidebar-item-margin-left: 1rem;
+    --sidebar-title-icon-left: -3rem;
+    --sidebar-title-text-margin-left: 1rem;
+    --sidebar-welcome-text-left:calc(var(--sidebar-width) + 2rem);
+    --canvas-width: calc(var(--sidebar-width)*(-1) + 100vw);
+}
+
+.alignIconToItemSide{
+    padding: 0.5rem 0 0.5rem 1rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.alignIconToItemSide:active, .alignIconToItemSide:hover{
+    background-color: darkblue;
+}
+
+body{
+    padding: 0;
+}
+
+.canvasContainer{
+}
+
+.dashboard{
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.5s;
+}
+
 .divider:after,
 .divider:before {
 content: "";
@@ -10,6 +42,111 @@ input{
     text-align: center;
 }
 
-#basic-nav-dropdown{
-    color: white;
+.navBarIcon{
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+.navBarIconContainer{
+    justify-content: end;
+    margin: 1rem 1rem 1rem 0;
+
+}
+
+.navigationBar{
+    z-index:1;
+    background-color: white;
+    border-bottom-style: solid;
+    border-color: darkgray;
+    border-width: 1px;
+    display: flex;
+    justify-content: end;
+    width: 100vw;
+}
+
+.sideBar{
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    z-index: 2;
+    background-color: turquoise;
+    transition: width 0.5s;
+    transition-timing-function: ease;
+}
+
+.sideBarIcon{
+    margin: 0.3rem 0 0.3rem 0;
+    width: 100%;
+    align-self: center;
+    color: black;
+}
+
+.sideBarItem{
+    margin-left: var(--sidebar-item-margin-left);
+    align-self: center;
+    color: black;
+    text-decoration: none;
+    transition: margin-left 0.5s;
+    font-size: x-large;
+}
+
+.sideBarTitle{
+    overflow: hidden;
+}
+
+.sideBarTitleIcon{
+    margin: 0.5rem 0 2rem 0;
+    position: absolute;
+    left: var(--sidebar-title-icon-left);
+    transition: left 0.5s;
+
+}
+
+.sideBarTitleText{
+    margin: 0.5rem 0.5rem 2rem 0;
+    margin-left: var(--sidebar-title-text-margin-left);
+    transition: margin-left 0.5s;
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-start;
+    
+}
+
+.sideItemsContainer{
+    display:flex;
+    flex-direction:column;
+    align-content: center;
+    margin: 0 auto 0 auto;
+    white-space: nowrap;
+}
+
+
+.toggler{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+}
+
+.toggler:active, .toggler:hover{
+    background-color: darkblue;
+}
+
+.topSideBar{
+    justify-content: flex-start;
+    align-items:flex-start;
+
+}
+
+.wellcomeText{
+    color:black;
+    position: absolute;
+    left: var(--sidebar-welcome-text-left);
+    top: 0.5rem;
+    transition: left 0.5s;
 }

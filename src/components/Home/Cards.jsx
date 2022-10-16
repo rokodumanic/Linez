@@ -11,7 +11,6 @@ function Cards(props) {
           {props.text ? <Card.Text>{props.text}</Card.Text>: null}
           {props.lastUpdate ? (<Card.Text>Last updated: {props.lastUpdate}</Card.Text>):null}
           {props.btn ? (<Button variant="dark" onClick={props.handleCardBtn}>{props.btn}</Button>):null}
-
         </Card.Body>
       </Card>
     </div>

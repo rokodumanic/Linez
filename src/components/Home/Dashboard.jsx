@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import NavigationBar from "../Navbar";
+import SideBar from "../sidebar/SideBar";
+import NavBar from "./NavBar";
 import Cards from "./Cards";
 import { nanoid } from "nanoid";
 import Canvas from "../Canvas/Canvas";
@@ -24,7 +25,9 @@ function Dashboard(){
         }]);
     return(
         <div>
-            <NavigationBar />
+            <SideBar />
+            <NavBar />
+            <div className="dashboard">
             {!cardClick && <div className="row mx-3">
             {cardInfo.map((eachCard) => {
                 return(
@@ -39,6 +42,7 @@ function Dashboard(){
                     )})}
             </div>}
             {cardClick && <Canvas/>}
+            </div>
         </div>
     );
 }

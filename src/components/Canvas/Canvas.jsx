@@ -1,10 +1,12 @@
-import React, { useRef, useEffect, useState} from "react";
-import { Stage, Layer, Line, Text, Rect, Ellipse, RegularPolygon } from 'react-konva';
+import React, { useRef, useEffect, useState, Component} from "react";
+import { Stage, Layer, Line, Text, Rect, Ellipse, RegularPolygon, Transformer } from 'react-konva';
 import handleMouseDown from "./freeDrawing/mouseDown";
 import handleMouseMove from "./freeDrawing/mouseMove";
 import { nanoid } from "nanoid";
 import getElementByKey from "./shapes/getElementByKey";
 import Toolbar from "./Toolbar";
+import Konva from "konva";
+import convertCssUnits from "css-unit-converter"
 
 
 const Canvas = () => {
@@ -13,6 +15,7 @@ const Canvas = () => {
   const isDrawing = useRef(false);
   const [ellipses, setEllipses] = useState([]);
   const [rects, setRects] = useState([]);
+  const [isSelected, setSelect] = useState(null);
   const stageRef = useRef(null);
   const layer1Ref = useRef(null);
   const toolLayer = useRef(null);
@@ -24,7 +27,7 @@ const Canvas = () => {
                 console.log(ellipses);
   }, [ellipses])
   useEffect(()=> {
-    // return draggable circle to original position
+    // return draggable rectangle to original position
     stageRef.current.findOne(".draggableRect").position({x: 20, y: 190})
     stageRef.current.findOne(".draggableRoundedRect").position({x: 20, y: 250})
                 console.log(rects);
@@ -73,8 +76,8 @@ function downloadURI(uri, name) {
             { key:nanoid(), x: e.target.x(), y: e.target.y(), fill: "brown", cornerRadius:10}
         ]);} else {
           console.log(i);
-        
       }
+      console.log(e.target.x());
     }
   }
 // update polygons
@@ -100,8 +103,42 @@ function downloadURI(uri, name) {
       else{console.log(i);}
       }
 
+  function  handleStageMouseDown(e) {
+        // clicked on stage - cler selection
+        if (e.target === e.target.getStage()) {
+          setSelect(null);
+          return;
+        }
+        // clicked on transformer - do nothing
+        const clickedOnTransformer =
+          e.target.getParent().className === "Transformer";
+        if (clickedOnTransformer) {
+          return;
+        }
+    
+        // find clicked rect by its name
+        const keyVar = e.target.key();
+        const rect = getElementByKey(rects, keyVar);
+        if (rect) {
+          setSelect(keyVar);
+        } else {
+          setSelect(null);
+        }
+      };
+
+  function handleRectChange(key, newProps) {
+        const rectangles = rects.concat();
+        const currentRect = getElementByKey(rectangles, key);
+        currentRect = {
+          ...getElementByKey(rectangles, key),
+          ...newProps
+        };
+    
+        setSelect({ rectangles });
+      };
   return (
-    <div>
+    <div className="canvasContainer">
+
       <select
         value={tool}
         onChange={(e) => {
@@ -112,7 +149,7 @@ function downloadURI(uri, name) {
         <option value="eraser">Eraser</option>
         <option value="dragger">Dragger</option>
       </select>
-      <button onClick={handleExport}>Click here to log stage data URL</button>
+      <button onClick={handleExport}>Export as PNG</button>
       <Stage
       ref={stageRef}
       width={window.innerWidth}
@@ -159,8 +196,12 @@ function downloadURI(uri, name) {
             fill={eachRect.fill}
             onDragStart={ (e) =>{changeShapeColor(e, rects, eachRect, "rect")}}
             onDragEnd={(e, key) =>{ updateShape(e, rects, eachRect, "rect") }}
+            onTransform={newProps => {handleRectChange(eachRect, newProps)}}
           />
         )) : null}
+        <TransformerComponent
+            selectedShapeKey={isSelected}
+          />
 {/* Display all regular polygons(triangle...) */}
 
       </Layer>
@@ -195,5 +236,57 @@ function downloadURI(uri, name) {
     </div>
   );
 };
+
+class TransformerComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.checkNode = this.checkNode.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkNode();
+    this.transformer.anchorFill("white");
+    this.transformer.anchorSize(10);
+    this.transformer.anchorCornerRadius(1);
+    this.transformer.anchorStroke	("#f004f4");
+    this.transformer.anchorStrokeWidth(1);
+    
+
+    };
+    
+
+  componentDidUpdate() {
+    this.checkNode();
+  }
+
+  checkNode() {
+    const stage = this.transformer.getStage();
+    const { selectedShapeKey } = this.props;
+
+    const selectedNode = stage.findOne("." + selectedShapeKey);
+    if (selectedNode === this.transformer.node()) {
+      return;
+    }
+
+    if (selectedNode) {
+      this.transformer.attachTo(selectedNode);
+    } else {
+      this.transformer.detach();
+    }
+    this.transformer.getLayer().batchDraw();
+  }
+  render() {
+    return (
+      <Transformer
+        ref={isSelected => {
+          this.transformer = isSelected;
+        }}
+        keepRatio={false}
+        rotateAnchorOffset={25}
+      />
+    );
+  }
+}
 
 export default Canvas;
