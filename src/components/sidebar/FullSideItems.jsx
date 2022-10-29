@@ -1,11 +1,14 @@
 import {XIcon, PlusIcon, PencilIcon, EyeIcon, ShareAndroidIcon, BrowserIcon, ChevronLeftIcon, ChevronRightIcon, DependabotIcon} from '@primer/octicons-react';
+import { Link } from 'react-router-dom';
 
 function FullSideItems(){
     return(
         <div className="sideItemsContainer">
             <div className="alignIconToItemSide">
+                <Link className="blackLink" to="/workspace">
                 <PlusIcon size={24}/>
                 <a className="sideBarItem" href="#new">New</a>
+                </Link>
             </div>
             <div className="alignIconToItemSide">
                 <PencilIcon size={24} />

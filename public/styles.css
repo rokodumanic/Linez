@@ -18,11 +18,13 @@
     background-color: darkblue;
 }
 
-body{
-    padding: 0;
+.blackLink{
+    color: black;
+    text-decoration: none;
 }
 
-.canvasContainer{
+body{
+    padding: 0;
 }
 
 .dashboard{
@@ -30,12 +32,34 @@ body{
     transition: margin-left 0.5s;
 }
 
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+.homeIntro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 40%;
+}
+
+.homeIntro h1{
+    margin: 7rem 0 3rem;
+}
+
+.homeIntro p{
+    margin-bottom: 3rem;
+}
+
+.homeIntro Button{
+    margin-bottom: 5rem;
+
+}
+
+.homeNav{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid gray;
 }
 
 input{
@@ -50,6 +74,12 @@ input{
     justify-content: end;
     margin: 1rem 1rem 1rem 0;
 
+}
+
+.navBarSignUp{
+    border-bottom: 1px solid lightgray;
+    margin: 1rem 0 0 0;
+    padding: 0 3rem;
 }
 
 .navigationBar{
@@ -123,6 +153,107 @@ input{
     white-space: nowrap;
 }
 
+.signUp{
+    display: flex;
+    margin-bottom: 5rem;
+    justify-content: center;
+}
+
+.signUpBenefits{
+    height:fit-content;
+    margin:12rem 0 0 5rem;
+    padding-right: 0.4rem;
+    border-style: hidden;
+    border-radius: 15px;
+    background-color: turquoise;
+}
+
+.signUpButton{
+    width: 100%;
+    height: 2.25rem;
+    background-color: turquoise;
+}
+
+.signUpButtonsContainer{
+    margin-top: 1.4rem;
+}
+
+.signUpFormContainer{
+    margin:5rem 0 0 5rem;
+    padding: 3rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    border-radius: 15px;
+}
+
+.signUpGoogleIcon{
+    margin-right: 0.5rem;
+    align-self: center;
+}
+
+.signUpInput{
+    width: 100%;
+    margin: 1.4rem 0 0 0;
+    padding-left: 0.6rem;
+    height: 2.25rem;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 6px;
+    border-width: 1px;
+    outline: none;
+}
+
+.signUpInput:focus{
+    border-style: solid;
+    border-width: 2px;
+    border-color: turquoise;
+}
+
+.signUpOrParagraph{
+    max-width: 500px;
+    font-size: small;
+    color: gray;
+    text-align: center;
+    justify-content: center;
+    margin: 1rem auto;
+    overflow: hidden;
+  }
+  
+  .signUpOrParagraph:before,
+  .signUpOrParagraph:after {
+    background-color: gray;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  
+  .signUpOrParagraph:before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+  
+  .signUpOrParagraph:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+
+.signUpParagraph{
+    font-size: small;
+    color: gray;
+    text-align: start;
+    justify-content: center;
+    margin: auto 0 auto 0;
+}
+
+.signUpToLogInText{
+    font-size: medium;
+    color: black;
+    margin: 3rem 0 0 0;
+}
 
 .toggler{
     position: absolute;
@@ -149,4 +280,9 @@ input{
     left: var(--sidebar-welcome-text-left);
     top: 0.5rem;
     transition: left 0.5s;
+}
+
+.whiteLink{
+    color: white;
+    text-decoration: none;
 }

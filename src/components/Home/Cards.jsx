@@ -1,5 +1,6 @@
 import React from "react";
 import {Card, Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function Cards(props) {
   return (
@@ -10,7 +11,7 @@ function Cards(props) {
           <Card.Title>{props.title}</Card.Title>
           {props.text ? <Card.Text>{props.text}</Card.Text>: null}
           {props.lastUpdate ? (<Card.Text>Last updated: {props.lastUpdate}</Card.Text>):null}
-          {props.btn ? (<Button variant="dark" onClick={props.handleCardBtn}>{props.btn}</Button>):null}
+          {(props.btn && props.to) ? (<Button variant="dark"><Link to={props.to} className="whiteLink" >{props.btn}</Link></Button>):null}
         </Card.Body>
       </Card>
     </div>

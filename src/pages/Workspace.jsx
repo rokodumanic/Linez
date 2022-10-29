@@ -1,7 +1,7 @@
 import React from "react";
-import NavBar from "../Home/NavBar";
-import SideBar from "../sidebar/SideBar";
-import Canvas from "./Canvas";
+import NavBar from "../components/Home/NavBar";
+import SideBar from "../components/sidebar/SideBar";
+import Canvas from "../components/Canvas/Canvas";
 //import { windowPresets } from "./preset";
 
 function Workspace() {
@@ -9,7 +9,6 @@ function Workspace() {
 
   return (
     <div>
-      <SideBar />
       <NavBar />
       <Canvas />
     </div>
