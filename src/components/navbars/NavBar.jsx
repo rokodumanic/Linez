@@ -1,5 +1,5 @@
-import { Button, Container, Navbar } from "react-bootstrap";
-import {InfoIcon, BellIcon, PersonIcon} from "@primer/octicons-react";
+import {InfoIcon, BellIcon} from "@primer/octicons-react";
+import UserDropdown from "../dropDowns/userIcon";
 
 function NavBar(){
     return(
@@ -8,7 +8,7 @@ function NavBar(){
             <div className="navBarIconContainer">
                 <InfoIcon className="navBarIcon" size={24} />
                 <BellIcon className="navBarIcon" size={24} />
-                <PersonIcon className="navBarIcon" size={24} />
+                <UserDropdown/>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import Workspace from "../pages/Workspace";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 import SignUp from "../pages/SignUp";
+import SettingsPage from "../pages/SettingsPage";
 
 function App(props) {
   /* if(props.isLogged){
@@ -17,6 +18,7 @@ function App(props) {
       <Routes>
         <Route path="/workspace" element={ <Workspace/> }/>
         <Route path="/signup" element={ <SignUp /> }/>
+        <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={ <LogIn/> }/>
         <Route path="/dashboard" element={ <Dashboard/> }/>
         <Route path="/" element={ <Home/> } />

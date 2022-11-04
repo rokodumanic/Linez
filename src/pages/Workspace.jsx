@@ -1,6 +1,5 @@
 import React from "react";
-import NavBar from "../components/Home/NavBar";
-import SideBar from "../components/sidebar/SideBar";
+import NavBar from "../components/navbars/NavBar";
 import Canvas from "../components/Canvas/Canvas";
 //import { windowPresets } from "./preset";
 

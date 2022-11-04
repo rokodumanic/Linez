@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
-import NavBar from "../components/Home/NavBar";
+import NavBar from "../components/navbars/NavBar";
 import Cards from "../components/Home/Cards";
 import { nanoid } from "nanoid";
 import Canvas from "../components/Canvas/Canvas";
