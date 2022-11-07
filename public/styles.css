@@ -158,8 +158,8 @@ input{
 
 .sideBarItem{
     margin-left: var(--sidebar-item-margin-left);
-    align-self: center;
-    color: black;
+    margin-bottom: 0;
+    display: inline-block;
     text-decoration: none;
     transition: margin-left 0.5s;
     font-size: x-large;

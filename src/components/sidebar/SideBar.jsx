@@ -31,7 +31,7 @@ function SideBar(){
             <h1 className="sideBarTitleText" >Draw </h1>
         </div>
         <div className="topSideBar">
-            <FullSideItems/ >
+            <FullSideItems/>
         </div>
         <button className="toggler" onClick={(e)=>toggleSideBar()}>
         {toggle ? <ChevronLeftIcon size={36} /> : <ChevronRightIcon size={36} />}
