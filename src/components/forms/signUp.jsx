@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import { Button, Container } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa"
-import { run } from "../../mongoDB/signUp";
+import { FaGoogle } from "react-icons/fa";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -16,11 +15,10 @@ class SignUpForm extends React.Component {
         this.handleInputChange=this.handleInputChange.bind(this);
     }
 
-    handleInputChange(event){
-        const target = event.target;
+    handleInputChange(target){
         const value = target.value;
         const name = target.name;
-
+        console.log(target);
         this.setState({
             [name]: value
         });
@@ -30,17 +28,17 @@ class SignUpForm extends React.Component {
         return(
             <Container fluid className="signUp">
                 <div className="signUpFormContainer">
-                    <form>
+                    <form id="signUpForm" action={"/signup"} method="post">
                         <div className="signUpInputsContainer">
                             <h1>Create your account</h1>
-                            <input className="signUpInput" type={"text"} onChange={this.handleInputChange} placeholder={"First name"} name={"fName"}></input>
-                            <input className="signUpInput" type={"text"} onChange={this.handleInputChange} placeholder={"Secound name"} name={"lName"}></input>
-                            <input className="signUpInput" type={"text"} onChange={this.handleInputChange} placeholder={"Your email"} name={"email"}></input>
-                            <input className="signUpInput" type={"text"} onChange={this.handleInputChange} placeholder={"Password must contain at least 6 characters"} name={"password"}></input>
+                            <input className="signUpInput" type={"text"} onChange={(e)=>{this.handleInputChange(e.target)}} placeholder={"First name"} name={"fName"} />
+                            <input className="signUpInput" type={"text"} onChange={(e)=>{this.handleInputChange(e.target)}} placeholder={"Secound name"} name={"lName"} />
+                            <input className="signUpInput" type={"text"} onChange={(e)=>{this.handleInputChange(e.target)}} placeholder={"Your email"} name={"email"} />
+                            <input className="signUpInput" type={"text"} onChange={(e)=>{this.handleInputChange(e.target)}} placeholder={"Password must contain at least 6 characters"} name={"password"} />
                             <p className="signUpParagraph">use 6 or more characters</p>
                         </div>
                         <div className="signUpButtonsContainer">
-                            <Button className="signUpButton" onClick={run(this.state)}>Sign up</Button>
+                            <Button className="signUpButton" type="submit">Sign up</Button>
                             <p className="signUpOrParagraph">or continue with</p>
                             <Button className="signUpButton"><FaGoogle className="signUpGoogleIcon"/>Google</Button>
                         </div>
