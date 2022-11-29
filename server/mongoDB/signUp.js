@@ -4,7 +4,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const dbName = "Linez";
                       
 
-
 module.exports.new = async function (props) {
    try {
         await client.connect();
@@ -23,16 +22,42 @@ module.exports.new = async function (props) {
         // Insert a single document, wait for promise so we can read it back
         const p = await col.insertOne(personDocument);
         // Find one document
-        const myDoc = await col.findOne();
+        const myDoc = await col.findOne({email: props.email});
         // Print to the console
         console.log(myDoc);
-        alert("Sign up was succesful");
        } catch (err) {
         console.log(err.stack);
-        alert("There was an error during sign up");
     }
 
     finally {
        await client.close();
    }
 };
+
+
+module.exports.logIn = async function (props) {
+    try {
+         await client.connect();
+         console.log("Connected correctly to server");
+         const db = client.db(dbName);
+         // Use the collection "people"
+         const col = db.collection("users");
+         // Construct a document 
+         console.log(props);
+         // Find one document
+         const hashObj = JSON.stringify(await col.findOne({email: props}, {projection: {_id:0, password:1}})); 
+         // Extract the hash vlue
+         const hash = hashObj.slice(hashObj.indexOf("$"), -2);
+         // Return clean hash value as string
+         return hash;
+        } catch (err) {
+         console.log(err.stack);
+     }
+ 
+     finally {
+        await client.close();
+    }
+ };
+ 
+
+ 
