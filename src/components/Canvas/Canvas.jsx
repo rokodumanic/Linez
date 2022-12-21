@@ -5,11 +5,11 @@ import handleMouseMove from "./freeDrawing/mouseMove";
 import { nanoid } from "nanoid";
 import getElementByKey from "./shapes/getElementByKey";
 import Toolbar from "./Toolbar";
-import Konva from "konva";
-import convertCssUnits from "css-unit-converter"
+import axios from "axios";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 
-const Canvas = () => {
+function Canvas(property) {
   const [tool, setTool] = useState('pen');
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
@@ -19,6 +19,9 @@ const Canvas = () => {
   const stageRef = useRef(null);
   const layer1Ref = useRef(null);
   const toolLayer = useRef(null);
+ 
+  /* const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get("project")); */
 
   useEffect(()=> {
     // return draggable circle to original position
@@ -32,7 +35,42 @@ const Canvas = () => {
     stageRef.current.findOne(".draggableRoundedRect").position({x: 20, y: 250})
                 console.log(rects);
   }, [rects])
+  useEffect(() => {
+    if(typeof property.projectId == "string"){
+      console.log("Property u canvas useEffect load from DB:", typeof property.projectId);
+      loadFromDB(property.projectId);
+    }
+  }, []);
 // Save canvas
+
+  async function loadFromDB (props){
+    try{
+      const loadedProject = await axios.post(process.env.REACT_APP_SERVER_URL + "/loadProject", {project: props});
+      console.log("LoadFromDB:", loadedProject);
+      setLines(loadedProject.data.lines);
+      setEllipses(loadedProject.data.ellipses);
+      setRects(loadedProject.data.rects);
+  }
+    catch(err){console.log(err)}
+  } 
+
+  
+
+ async function sendToDB (){
+   await axios.post(process.env.REACT_APP_SERVER_URL + "/workspace", 
+    { title: "Naslov",
+      line: lines,
+      ellipse: ellipses,
+      rect: rects, 
+      projectId: (typeof property.projectId == "string" ? property.projectId : false)
+    })
+    .then((response) => {
+      console.log("response:", response);
+    }, (error) => {
+      console.log("error:", error);
+    }); 
+}; 
+
 const handleExport = () => {
   toolLayer.current.visible(false);
   const uri = stageRef.current.toDataURL();
@@ -41,7 +79,7 @@ const handleExport = () => {
   downloadURI(uri, name);
   toolLayer.current.visible(true);
 };
-//download PNG
+//download PNG 
 function downloadURI(uri, name) {
   var link = document.createElement("a");
   link.download = name;
@@ -136,6 +174,9 @@ function downloadURI(uri, name) {
     
         setSelect({ rectangles });
       };
+
+
+
   return (
     <div className="canvasContainer">
 
@@ -150,6 +191,7 @@ function downloadURI(uri, name) {
         <option value="dragger">Dragger</option>
       </select>
       <button onClick={handleExport}>Export as PNG</button>
+      <button onClick={()=> sendToDB()}>Save</button>
       <Stage
       ref={stageRef}
       width={window.innerWidth}

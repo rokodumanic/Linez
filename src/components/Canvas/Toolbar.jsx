@@ -25,8 +25,7 @@ export default class Toolbar extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.props.layer ? (
-                    <React.Fragment>
+                
                         <ToolBar />
 
         {/* Bottom ellipse */}
@@ -122,8 +121,7 @@ export default class Toolbar extends Component {
         {/* Bottom triangle */}
 
         {/* Top triangle */}
-                    </React.Fragment>
-                ) : null}
+                    
             </React.Fragment>
         )
     }

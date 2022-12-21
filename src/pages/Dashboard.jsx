@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import NavBar from "../components/navbars/NavBar";
 import Cards from "../components/Home/Cards";
 import { nanoid } from "nanoid";
 import Canvas from "../components/Canvas/Canvas";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 function Dashboard(){
     const [cardClick, setCardClick] = useState(false);
-    const [cardInfo, setCard]= useState([
+    const [cardInfo, setCard]= useState([]);
+        
+    useEffect(() => {
+        getProjects();
+    },[]);
+    async function getProjects() {
+        const projectList = await axios.post(process.env.REACT_APP_SERVER_URL + "/dashboard", {})
+    .then((response) => {
+        console.log("response:", response);
+        setCard(response.data.projects);
+    }).catch( (error) => {
+        console.log("error:", error);
+    });};
+        /* [
         
         {
             key: nanoid(),
@@ -16,7 +31,7 @@ function Dashboard(){
             title:"New_File_1",
             text:"",
             lastUpdate:"30.08.2022."
-        }]);
+        }] */
     return(
         <div>
             <SideBar />
@@ -28,16 +43,18 @@ function Dashboard(){
                         title={"New File"}
                         text={"Start working on a new canvas"}
                         btn={"Start"}
-                        to={"/workspace"}
+                        to={""}
                     />
                 {cardInfo.map((eachCard) => {
+                    console.log(eachCard);
                     return(
                           <Cards 
                             img={eachCard.img}
-                            title={eachCard.title}
+                            title={eachCard}
                             text={eachCard.text}
                             lastUpdate={eachCard.lastUpdate}
-                            btn={eachCard.btn}
+                            btn={"Open"}
+                            to={eachCard}
                         />
                         )})}
                 </div>}
