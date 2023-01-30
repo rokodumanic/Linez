@@ -12,7 +12,7 @@ function Workspace() {
   console.log("from: ", projectId);
   return (
     <div>
-      <NavBar />
+      <NavBar projectId={projectId} text="projectName"/>
       <Canvas projectId={projectId}/>
     </div>
   );

@@ -1,8 +1,9 @@
-const handleMouseDown = (e, [lines, setLines], tool, isDrawing) => {
+const handleMouseDown = (e, [lines, setLines], tool, isDrawing, size) => {
   if(tool!=='pen' && tool!=='eraser') {return;}
   isDrawing.current = true;
   const pos = e.target.getStage().getPointerPosition();
-  setLines([...lines, { tool, points: [pos.x, pos.y] }]);
+  const id = lines.length;
+  setLines([...lines, { id, tool, size, points: [pos.x, pos.y] }]);
 };
 
 export default handleMouseDown;

@@ -26,37 +26,31 @@ app.post("/", function(req, res){
 
 app.post("/signup", async function(req, res){
     console.log("post");
-    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-        // Store hash in your password DB.
-        req.body.password = hash;
-    });
     console.log("11111111111111111111111111");
-    await user.new(req.body).catch(console.dir);
+    await user.new(req.body.user).catch(console.dir);
     console.log("222222222222222222222222");
     res.redirect("/dashboard");
     
 });
 
 app.post("/login", async function(req, res){
-    console.log("logging in");
-    const hash = await user.logIn(req.body.email);
+    console.log("logging in:", req.body);
+    const [hash, salt] = await user.logIn(req.body.email);
+    console.log("accepted hash from server", hash);
+    console.log("accepted salt from server", salt);
 
-    const password = req.body.password;
-    console.log("HASH: ", hash);
-    console.log("PASSWORD: ", password);
-    console.log("PASSTYPE:", typeof password, "HASHTYPE:", typeof hash);
-    bcrypt.compare(password, hash, (err, result) => {
-        if(err){
-            console.log(err);
-        } else if (result == true){
-            console.log("krajnji result", result);
-            res.redirect("/dashboard");
-        } else if(result == false){
-            console.log("krajnji result", result);
-            res.redirect("/login");
-        }
-    });
-    
+    if(req.body.hash === hash){
+        res.redirect("/dashboard");
+    }else if(req.body.hash != hash){
+        res.redirect("/login");
+    } else{console.log("Log in failed!!!")}
+});
+
+app.post("/getsalt", async function(req, res){
+    console.log("get salt");
+    const salt = await user.getSalt(req.body.email);
+    console.log("got Salt", salt);
+    res.send(salt);
 });
 
 app.post("/dashboard", async function(req, res){

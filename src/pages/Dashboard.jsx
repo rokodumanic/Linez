@@ -3,8 +3,6 @@ import SideBar from "../components/sidebar/SideBar";
 import NavBar from "../components/navbars/NavBar";
 import Cards from "../components/Home/Cards";
 import { nanoid } from "nanoid";
-import Canvas from "../components/Canvas/Canvas";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -19,7 +17,7 @@ function Dashboard(){
         const projectList = await axios.post(process.env.REACT_APP_SERVER_URL + "/dashboard", {})
     .then((response) => {
         console.log("response:", response);
-        setCard(response.data.projects);
+        setCard(response.data);
     }).catch( (error) => {
         console.log("error:", error);
     });};
@@ -35,7 +33,7 @@ function Dashboard(){
     return(
         <div>
             <SideBar />
-            <NavBar />
+            <NavBar version="welcome" />
             <div className="dashboard">
                 {!cardClick && <div className="row mx-3">
                     <Cards 
@@ -50,11 +48,11 @@ function Dashboard(){
                     return(
                           <Cards 
                             img={eachCard.img}
-                            title={eachCard}
+                            title={eachCard.title}
                             text={eachCard.text}
-                            lastUpdate={eachCard.lastUpdate}
+                            lastUpdate={eachCard.date}
                             btn={"Open"}
-                            to={eachCard}
+                            to={eachCard._id}
                         />
                         )})}
                 </div>}

@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
-import { Rect, Ellipse, RegularPolygon } from 'react-konva'
+import { Rect, Ellipse, RegularPolygon } from 'react-konva';
+import {Konva} from 'konva';
 //at start, two same rectangles at one place
 //at the end of drag, note the x and y of the dragged rectangle, append it to GraphicsMain
 //return the dragged rectangle to original
+<script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
 
 const ToolBar = () => (
     <Rect
+        x={30}
         y={80}
         width={77.5}
         height={355}
-        fill="white"
-        shadowBlur={5}
-        shadowColor="black"
+        cornerRadius={15}
+        fill={"#F5F4F2"}
+        stroke={"black"}
+        strokeWidth={1}
     />
 )
 
@@ -22,6 +26,8 @@ export default class Toolbar extends Component {
         count: 0,
         isDragging: false
     }
+
+
     render() {
         return (
             <React.Fragment>
@@ -34,13 +40,13 @@ export default class Toolbar extends Component {
                             radiusY={15}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={37.5}
+                            x={67.5}
                             y={120}
                         />
         {/* Top ellipse */}
                         <Ellipse
                           name="draggableEllipse"
-                          x={37.5}
+                          x={67.5}
                           y={120}
                           draggable={this.props.tool==='dragger'?true:false}
                           radiusX={30}
@@ -54,13 +60,13 @@ export default class Toolbar extends Component {
                             radiusY={20}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={37.5}
+                            x={67.5}
                             y={160}
                         />
         {/* Top circle */}
                         <Ellipse
                           name="draggableCircle"
-                          x={37.5}
+                          x={67.5}
                           y={160}
                           draggable={this.props.tool==='dragger'?true:false}
                           radiusX={20}
@@ -74,8 +80,8 @@ export default class Toolbar extends Component {
                             height={35}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={20}
-                            y={190}
+                            x={50}
+                            y={200}
                             fill="white"
                         />
         {/* Top rectangle */}
@@ -85,8 +91,8 @@ export default class Toolbar extends Component {
                             height={35}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={20}
-                            y={190}
+                            x={50}
+                            y={200}
                             draggable={this.props.tool==='dragger'?true:false}
                             fill="green"
                             ref="draggableRect"
@@ -99,7 +105,7 @@ export default class Toolbar extends Component {
                             height={35}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={20}
+                            x={50}
                             y={250}
                             fill="white"
                         />
@@ -111,7 +117,7 @@ export default class Toolbar extends Component {
                             height={35}
                             stroke="black"
                             strokeWidth={1.5}
-                            x={20}
+                            x={50}
                             y={250}
                             draggable={this.props.tool==='dragger'?true:false}
                             fill="green"
@@ -119,7 +125,7 @@ export default class Toolbar extends Component {
                             onDragEnd={(e) => this.props.apendRoundedRect(e, "rect")}
                         />
         {/* Bottom triangle */}
-
+            
         {/* Top triangle */}
                     
             </React.Fragment>
