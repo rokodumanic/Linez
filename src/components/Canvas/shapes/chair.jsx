@@ -1,4 +1,4 @@
-import { Path } from "react-konva";
+
 export function ChairSVG() {
     return(
         <svg width="50" height="50" viewBox="50 50 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">

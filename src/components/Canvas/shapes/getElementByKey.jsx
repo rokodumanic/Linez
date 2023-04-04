@@ -1,7 +1,7 @@
 
 function getElementByKey(arr, key){
     return arr.find(obj => {
-      return obj.key === key ? obj : null;
+      return obj.id === key ? obj : null;
     });
   }
 

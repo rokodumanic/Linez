@@ -4,7 +4,6 @@ export function SingleBedSVG() {
         <svg width="50" height="50" viewBox="50 50 400 400" xmlns="http://www.w3.org/2000/svg">
 
          <g>
-          <title>Layer 1</title>
           <line stroke="#000" strokeWidth="15" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_1" y2="409.58156" x2="388" y1="176" x1="388" fill="none"/>
           <line strokeWidth="15" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_2" y2="408.99998" x2="267" y1="175.99999" x1="267.66667" stroke="#000" fill="none"/>
           <line stroke="#000" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_3" y2="402.3546" x2="393.16309" y1="401.3546" x1="262.1631" strokeWidth="15" fill="none"/>

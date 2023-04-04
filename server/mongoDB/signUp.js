@@ -78,6 +78,7 @@ module.exports.logIn = async function (props) {
          let project = {
             title: props.title,
             lines: props.line, 
+            strLines: props.strLine,
             ellipses: props.ellipse,
             rects: props.rect,
             date: props.date
@@ -152,6 +153,7 @@ module.exports.loadProject = async function (props) {
         console.log("loadProject module:", props);
         const project = await col.findOne({_id: projectId}, {projection: {title: true,
             lines: true, 
+            strLines: true,
             ellipses: true,
             rects: true}});
         console.log("Loading:", project);
